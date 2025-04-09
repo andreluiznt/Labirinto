@@ -55,6 +55,7 @@ class Maze:
             posy = random.randint(2, 39)
             if self.M[posx, posy] == Maze.HALL:
                 self.init_pos_player = (posx, posy)
+                self.M[posx, posy] = Maze.PLAYER
                 break
         
         #escolhendo a posição aleatória do premio em um corredor
@@ -85,6 +86,7 @@ class Maze:
 
         '''
         if self.M[pos[0], pos[1]] == Maze.PRIZE:
+            self.WINNER = True
             return True
         else:
             return False
@@ -139,6 +141,7 @@ class Maze:
             Posição inicial (x,y) do jogador no labirinto.
 
         '''
+        
         return self.init_pos_player
             
     def run(self):
@@ -166,6 +169,7 @@ class Maze:
         GRAY = (192, 192, 192)
         BLUE = (0, 0, 255)
         GOLD = (255, 215, 0)
+        WHITE = (255, 255, 255)
     
         running = True
         while running:
@@ -187,7 +191,7 @@ class Maze:
                         color = BLUE
                     elif self.M[y, x] == Maze.PRIZE:
                         color = GOLD
-                       
+
                     pygame.draw.rect(screen, color, (x * cell_size, y * cell_size, cell_size, cell_size))
-    
+
             pygame.display.flip()
